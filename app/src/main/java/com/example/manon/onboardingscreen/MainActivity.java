@@ -4,6 +4,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     private SliderAdapter sliderAdapter;
 
+    private Button backButton;
+    private Button nextButton;
+
+    private int currentPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         slideViewPager = findViewById(R.id.slideViewPager);
         dotsLayout = findViewById(R.id.dots);
 
+        backButton = findViewById(R.id.previousButton);
+        nextButton = findViewById(R.id.nextButton);
+
         sliderAdapter = new SliderAdapter(this);
 
         slideViewPager.setAdapter(sliderAdapter);
@@ -31,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         addDotsIndicator(0);
 
         slideViewPager.addOnPageChangeListener(viewListener);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                slideViewPager.setCurrentItem(currentPage-1);
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                slideViewPager.setCurrentItem(currentPage+1);
+            }
+        });
     }
 
     public void addDotsIndicator(int position) {
@@ -59,6 +83,26 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             addDotsIndicator(position);
+            currentPage = position;
+            if (currentPage == 0){
+                nextButton.setEnabled(true);
+                backButton.setEnabled(false);
+                backButton.setVisibility(View.INVISIBLE);
+                nextButton.setText("Next");
+                backButton.setText("");
+            } else if (position == dots.length -1) {
+                nextButton.setEnabled(false);
+                backButton.setEnabled(true);
+                backButton.setVisibility(View.VISIBLE);
+                nextButton.setText("Finish");
+                backButton.setText("Back");
+            } else  {
+                nextButton.setEnabled(true);
+                backButton.setEnabled(true);
+                backButton.setVisibility(View.VISIBLE);
+                nextButton.setText("Next");
+                backButton.setText("Back");
+            }
         }
 
         @Override
