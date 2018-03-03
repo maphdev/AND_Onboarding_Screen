@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -16,20 +15,20 @@ import android.widget.TextView;
 
 public class SliderAdapter extends PagerAdapter {
 
-    Context context;
-    LayoutInflater layoutInflater;
+    private Context context;
+    private LayoutInflater layoutInflater;
 
     public SliderAdapter(Context context) {
         this.context = context;
     }
 
-    public int[] slide_images = {
+    private int[] slide_images = {
             R.drawable.eat_icon,
             R.drawable.sleep_icon,
             R.drawable.code_icon
     };
 
-    public String[] slide_headings = {
+    private String[] slide_headings = {
             "EAT",
             "SLEEP",
             "CODE"
@@ -42,17 +41,18 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == (ConstraintLayout) object;
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        assert layoutInflater != null;
         View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
         ImageView slideImageView = view.findViewById(R.id.imageView);
         TextView slideHeading = view.findViewById(R.id.heading);
-        TextView slideText = view.findViewById(R.id.heading);
+        TextView slideText = view.findViewById(R.id.textPage);
 
         slideImageView.setImageResource(slide_images[position]);
         slideHeading.setText(slide_headings[position]);

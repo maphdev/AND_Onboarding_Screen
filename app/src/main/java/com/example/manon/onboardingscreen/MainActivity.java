@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void addDotsIndicator(int position) {
+    private void addDotsIndicator(int position) {
         dots = new TextView[3];
         dotsLayout.removeAllViews();
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
+    private ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -88,20 +88,20 @@ public class MainActivity extends AppCompatActivity {
                 nextButton.setEnabled(true);
                 backButton.setEnabled(false);
                 backButton.setVisibility(View.INVISIBLE);
-                nextButton.setText("Next");
-                backButton.setText("");
+                nextButton.setText(getResources().getText(R.string.next));
+                backButton.setText(getResources().getText(R.string.nothing));
             } else if (position == dots.length -1) {
                 nextButton.setEnabled(false);
                 backButton.setEnabled(true);
                 backButton.setVisibility(View.VISIBLE);
-                nextButton.setText("Finish");
-                backButton.setText("Back");
+                nextButton.setText(getResources().getText(R.string.finish));
+                backButton.setText(getResources().getText(R.string.back));
             } else  {
                 nextButton.setEnabled(true);
                 backButton.setEnabled(true);
                 backButton.setVisibility(View.VISIBLE);
-                nextButton.setText("Next");
-                backButton.setText("Back");
+                nextButton.setText(getResources().getText(R.string.next));
+                backButton.setText(getResources().getText(R.string.back));
             }
         }
 
