@@ -1,7 +1,7 @@
 # Onboarding Screen
 Onboarding screen from scratch without using library in Android Studio.
 
-![preview](https://github.com/maphdev/AND_Onboarding_Screen/blob/master/demo.gif)
+![preview](https://github.com/maphdev/AND_Onboarding_Screen/blob/master/preview.gif)
 
 What is used :
 - ViewPager/OnPageChangeListener
